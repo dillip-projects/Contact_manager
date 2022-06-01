@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     //variable
     private ContactAdapter contactAdapter;
     public ArrayList<Contact> contactArrayList = new ArrayList<>();
-    public RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private DatabaseHelper db;
 
     @Override
@@ -49,10 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
         //contact list
 
-        contactArrayList.addAll(db.getAllContacts());
-        contactAdapter=new ContactAdapter(this,contactArrayList,MainActivity.this);
 
-        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getApplicationContext());
+       contactAdapter=new ContactAdapter(this,contactArrayList,MainActivity.this);
+        contactArrayList.addAll(db.getAllContacts());
+
+       RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(contactAdapter);
